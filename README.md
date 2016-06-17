@@ -1,2 +1,1 @@
-# ZylenvBlog
-# Visit [Blog](http://blog.zylenv.com)
+## Visit [Blog](http://blog.zylenv.com)
