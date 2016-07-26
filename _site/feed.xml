@@ -6,9 +6,414 @@
 </description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 30 May 2016 13:33:08 +0800</pubDate>
-    <lastBuildDate>Mon, 30 May 2016 13:33:08 +0800</lastBuildDate>
+    <pubDate>Tue, 26 Jul 2016 15:41:22 +0800</pubDate>
+    <lastBuildDate>Tue, 26 Jul 2016 15:41:22 +0800</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
+    
+      <item>
+        <title>简介CSS的Box-Model</title>
+        <description>&lt;p&gt;##Opening the Box Model
+####1、display&lt;/p&gt;
+
+&lt;p&gt;浏览器会依据element的display属性来决定这个element如何渲染，display的取值有以下几种：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;block&lt;/code&gt;	A value of block will make that element a block-level element.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;inline&lt;/code&gt; A value of inline will make that element an inline-level element.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;inline-block&lt;/code&gt; Using this value will allow an element to behave as a block-level element, accepting all box model properties. However, the element will be displayed in line with other elements, and it will not begin on a new line by default.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;none&lt;/code&gt; Using a value of &lt;code class=&quot;highlighter-rouge&quot;&gt;none&lt;/code&gt; will completely hide an element and render the page as if that element doesn’t exist. Any elements nested within this element will also be hidden.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;####2、Box Model
+每一个页面上的元素都是rectangular box，都符合box model。CSS中有一些属性决定着box的大小：&lt;code class=&quot;highlighter-rouge&quot;&gt;width&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;height&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;padding&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;border&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;margin&lt;/code&gt;。&lt;code class=&quot;highlighter-rouge&quot;&gt;width&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;height&lt;/code&gt;指定element的内容的大小，&lt;code class=&quot;highlighter-rouge&quot;&gt;padding&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;border&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;margin&lt;/code&gt;扩大box的外围。&lt;/p&gt;
+
+&lt;p&gt;CSS:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;div {
+	border: 6px solid #949599;
+	height: 100px;
+	margin: 20px;
+	padding: 20px;
+	width: 400px;
+}		
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;div的宽度为：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;margin-right + border-right + padding-right + width + padding-left + border-left + margin-left   
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;div的高度为：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;margin-top + border-top + padding-top + height + padding-bottom + border-bottom + margin-bottom
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;如下图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/box-model.png&quot; width=&quot;80%&quot; max-width=&quot;600px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;当我们设置一个元素的width为 400px 时，它实际的width可能是 492px，我们需要将&lt;code class=&quot;highlighter-rouge&quot;&gt;padding&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;border&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;margin&lt;/code&gt;考虑进去。实际的width并不仅仅包括width属性，也包含&lt;code class=&quot;highlighter-rouge&quot;&gt;padding-left&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;padding-right&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;border-left&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;border-right&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;marin-left&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;margin-right&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;####3、Box Model的相关属性
+#####（1）Width &amp;amp; Height
+每一个element都有默认的width和height，默认的width和height是由element的display属性决定的。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;width &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Block-level&lt;/code&gt; element的默认width是100%，独占整个水平空间。&lt;code class=&quot;highlighter-rouge&quot;&gt;inline&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;inline-block&lt;/code&gt;的width是由element本身内容所需要占用的宽度决定的，&lt;code class=&quot;highlighter-rouge&quot;&gt;inline-level&lt;/code&gt;的元素没有固定的大小，它的宽高与&lt;code class=&quot;highlighter-rouge&quot;&gt;non-inline&lt;/code&gt; element相关。  &lt;br /&gt;
+指定&lt;code class=&quot;highlighter-rouge&quot;&gt;non-inline&lt;/code&gt; element的高度使用width属性&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;height
+element默认的height是由它的内容决定的，内容需要多高，它的高度就会扩展多大。
+指定&lt;code class=&quot;highlighter-rouge&quot;&gt;non-inline&lt;/code&gt; element的高度使用height属性&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;注: &lt;code class=&quot;highlighter-rouge&quot;&gt;inline-level&lt;/code&gt; element 不接受&lt;code class=&quot;highlighter-rouge&quot;&gt;width&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;height&lt;/code&gt;的约束。但是&lt;code class=&quot;highlighter-rouge&quot;&gt;block&lt;/code&gt;或者&lt;code class=&quot;highlighter-rouge&quot;&gt;inline-block&lt;/code&gt; element会受&lt;code class=&quot;highlighter-rouge&quot;&gt;width&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;height&lt;/code&gt;的约束。&lt;/p&gt;
+
+&lt;p&gt;#####（2）Margin &amp;amp; Padding
+对于不同type的element，每个浏览器默认的margin和padding都不一样。我们可以使用CSS reset去将这些默认的margin和padding的设为0。&lt;/p&gt;
+
+&lt;p&gt;CSS Reset:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/* http://meyerweb.com/eric/tools/css/reset/ 2. v2.0 | 20110126		License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: &#39;&#39;;
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+} margin和padding能帮助用户更好的理清页面上的逻辑。从文字的段落上我们能很好的看到这一点。   
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Margin &lt;code class=&quot;highlighter-rouge&quot;&gt;margin&lt;/code&gt;属性允许我们设置围绕一个element的空间。&lt;code class=&quot;highlighter-rouge&quot;&gt;margin&lt;/code&gt;是一个元素&lt;code class=&quot;highlighter-rouge&quot;&gt;border&lt;/code&gt;之外的空间，而且完全透明。&lt;/li&gt;
+  &lt;li&gt;Padding &lt;code class=&quot;highlighter-rouge&quot;&gt;padding&lt;/code&gt;是与&lt;code class=&quot;highlighter-rouge&quot;&gt;margin&lt;/code&gt;非常相似的一个属性。但是它是一个element的&lt;code class=&quot;highlighter-rouge&quot;&gt;border&lt;/code&gt;之内的
+空间。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;注:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;margin&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;padding&lt;/code&gt;对&lt;code class=&quot;highlighter-rouge&quot;&gt;inline-level&lt;/code&gt;element 的影响与它对&lt;code class=&quot;highlighter-rouge&quot;&gt;block&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;inline-block&lt;/code&gt;的影响是不一样的。&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;margin&lt;/code&gt;对于&lt;code class=&quot;highlighter-rouge&quot;&gt;inline-level&lt;/code&gt;element只在水平方向起作用（也就是说margin只有left和right起作用）。&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;padding&lt;/code&gt;对&lt;code class=&quot;highlighter-rouge&quot;&gt;inline-level&lt;/code&gt;element在四个方向上都起作用。但是竖直方向上的&lt;code class=&quot;highlighter-rouge&quot;&gt;top&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;bottom&lt;/code&gt;可能会导致element侵入它所在行的上方或下方。&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;padding&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;margin&lt;/code&gt;对于&lt;code class=&quot;highlighter-rouge&quot;&gt;block&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;inline-block&lt;/code&gt;element的影响则是正常的。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;margin&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;padding&lt;/code&gt;的值的顺序为&lt;code class=&quot;highlighter-rouge&quot;&gt;top&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;right&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;bottom&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;left&lt;/code&gt;,从上开始顺时针旋转。 &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;margin&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;padding&lt;/code&gt;的背景颜色都是透明的，而且不能设置它的颜色。它会把它底部element的颜色透出来。&lt;/p&gt;
+
+&lt;p&gt;#####（3）Border
+&lt;code class=&quot;highlighter-rouge&quot;&gt;border&lt;/code&gt;处于&lt;code class=&quot;highlighter-rouge&quot;&gt;margin&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;padding&lt;/code&gt;之间。为element提供一个outline。指定一个border至少需要三个值：&lt;code class=&quot;highlighter-rouge&quot;&gt;width&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;style&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;color&lt;/code&gt;。也可以通过&lt;code class=&quot;highlighter-rouge&quot;&gt;border-width&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;border-style&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;border-color&lt;/code&gt;分别单独指定这三个元素。 &lt;br /&gt;
+指定p的border样式：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;p {
+	border: 6px solid #994532;
+} 这个样式与下面的CSS样式功效是相等的：
+
+p {
+	border-width: 6px;
+	border-style: solid;
+	border-color: #994532;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;也可以单独指定border某一边的样式：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;p {
+	border-bottom: 6px solid #994532;
+}
+p {
+	border-bottom-width: 6px;
+	border-bottom-style: solid;
+	border-bottom-color: #994532;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h6 id=&quot;border-radius&quot;&gt;Border Radius&lt;/h6&gt;
+&lt;p&gt;border radius的单位可以是&lt;code class=&quot;highlighter-rouge&quot;&gt;px&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;%&lt;/code&gt;。指定一个border radius可以通过四个脚指定：&lt;code class=&quot;highlighter-rouge&quot;&gt;top-left&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;top-right&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;bottom-right&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;bottom-left&lt;/code&gt;。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;div {
+	border-radius: 5px;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;上面的CSS样式相当于同时指定&lt;code class=&quot;highlighter-rouge&quot;&gt;top-left&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;top-right&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;bottom-right&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;bottom-left&lt;/code&gt;为5px。单独指定如下：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;div {
+	border-top-right-radius: 5px;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;#####（4）Box Sizing
+一般我们要计算一个element的实际大小，需要通过它的&lt;code class=&quot;highlighter-rouge&quot;&gt;border&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;padding&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;margin&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;width&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;height&lt;/code&gt;等属性计算得到。&lt;code class=&quot;highlighter-rouge&quot;&gt;box-sizing&lt;/code&gt;是CSS3引进的属性。它允许我们指定element如何计算其大小。&lt;code class=&quot;highlighter-rouge&quot;&gt;box-sizing&lt;/code&gt;有三个基础的取值&lt;code class=&quot;highlighter-rouge&quot;&gt;content-box&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;padding-box&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;border-box&lt;/code&gt;,每一个取值对于box的size的计算方式都是不一样的。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Content Box	&lt;code class=&quot;highlighter-rouge&quot;&gt;content-box&lt;/code&gt;是&lt;code class=&quot;highlighter-rouge&quot;&gt;box-sizing&lt;/code&gt;的默认值。如果你不指定element的box-sizing属性，那么它的box-sizing属性的值就是&lt;code class=&quot;highlighter-rouge&quot;&gt;content-box&lt;/code&gt;。element的内容大小为width，height属性的值，element的size大小就是width、height加上padding,border和margin属性的值。&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Padding Box 如果&lt;code class=&quot;highlighter-rouge&quot;&gt;box-sizing&lt;/code&gt;的值为&lt;code class=&quot;highlighter-rouge&quot;&gt;padding-box&lt;/code&gt;，那么如果:&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;div {
+    box-sizing: padding-box;
+    padding: 20px;
+    width: 200px;
+    border:2px;
+    margin: 20px;
+} element的实际宽度为 margin-left + border-left + width + border-right + margin-right。而element的内容宽度为width减去padding-left和padding-right的值,高度为height减去padding-left和padding-right的值。也就是说width和height属性将padding属性包含在内。
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Border Box 如果&lt;code class=&quot;highlighter-rouge&quot;&gt;box-sizing&lt;/code&gt;属性为&lt;code class=&quot;highlighter-rouge&quot;&gt;border-box&lt;/code&gt;时，width和height属性将 border 和 padding 都包含在内。也就是说如果 element的width为400px，padding为20px，border为10px，那么element的实际宽度还是400px。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;注：&lt;/strong&gt; 不管&lt;code class=&quot;highlighter-rouge&quot;&gt;box-sizing&lt;/code&gt;为什么值，margin都不会包含到width中，element的实际大小都需要加上margin。&lt;/p&gt;
+
+&lt;p&gt;总的来说，一般将&lt;code class=&quot;highlighter-rouge&quot;&gt;box-sizing&lt;/code&gt;设置为&lt;code class=&quot;highlighter-rouge&quot;&gt;border-box&lt;/code&gt;最好。设置为&lt;code class=&quot;highlighter-rouge&quot;&gt;border-box&lt;/code&gt;更能方便我们计算element的位置与大小。下面的css代码能将所有element的&lt;code class=&quot;highlighter-rouge&quot;&gt;box-sizing&lt;/code&gt;默认设置为&lt;code class=&quot;highlighter-rouge&quot;&gt;border-box&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;*,
+*:before,
+*:after {
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+		    box-sizing: border-box;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+</description>
+        <pubDate>Sat, 23 Jul 2016 18:14:19 +0800</pubDate>
+        <link>/ios/2016/07/23/%E7%AE%80%E4%BB%8BCSS%E7%9A%84Box-Model.html</link>
+        <guid isPermaLink="true">/ios/2016/07/23/%E7%AE%80%E4%BB%8BCSS%E7%9A%84Box-Model.html</guid>
+        
+        
+        <category>iOS</category>
+        
+      </item>
+    
+      <item>
+        <title>CSS选择器简介</title>
+        <description>&lt;h2 id=&quot;getting-to-kown-css&quot;&gt;Getting to Kown CSS&lt;/h2&gt;
+&lt;p&gt;###CSS是如何渲染的
+(From &lt;a href=&quot;http://learn.shayhowe.com/html-css/getting-to-know-css/&quot;&gt;CSS&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;1、所有的CSS Styles(样式)都是从上往下读的，优先级相等的选择器，处于后面的具有较高优先级。&lt;/p&gt;
+
+  	p {
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	background-color: orange;
+	font-size: 24px;
+}
+p {
+	background-color: green;
+}
+body {
+	background-color: orange;
+	background-color: white;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;最终的结果是：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;p {
+	font-size: 24px;
+	background-color: green;
+}
+body {
+	background-color: white;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;2、每个CSS选择器都有一个weight来计算它的优先级。优先级指示着页面如何渲染。一个选择器的weight越大，它的优先级越高。&lt;br /&gt;
+选择器分&lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt;，&lt;code class=&quot;highlighter-rouge&quot;&gt;class&lt;/code&gt;，&lt;code class=&quot;highlighter-rouge&quot;&gt;ID&lt;/code&gt;三种，每一种都有不同的weight。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt;选择器拥有最低的优先级&lt;code class=&quot;highlighter-rouge&quot;&gt;0-0-1&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;class&lt;/code&gt;选择器拥有中等的优先级&lt;code class=&quot;highlighter-rouge&quot;&gt;0-1-0&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ID&lt;/code&gt;选择器拥有最高的优先级&lt;code class=&quot;highlighter-rouge&quot;&gt;1-0-0&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;####Example 1（单个Selector的情况）&lt;/p&gt;
+
+&lt;p&gt;HTML:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;p id=&#39;food&#39;&amp;gt;...&amp;lt;/p&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;CSS:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#food {
+	background-color: green;
+}
+p {
+	background-color: red;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;由于&lt;code class=&quot;highlighter-rouge&quot;&gt;ID Selector&lt;/code&gt;拥有最高的优先级所以最终结果是：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#food {
+	background-color: green;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;####Example 2（组合Selector的情况） &lt;br /&gt;
+HTML:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;div class=&quot;hotdog&quot;&amp;gt;
+	&amp;lt;p&amp;gt;...&amp;lt;/p&amp;gt;
+	&amp;lt;p&amp;gt;...&amp;lt;/p&amp;gt;
+	&amp;lt;p class=&quot;mustard&quot;&amp;gt;...&amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;CSS:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;.hotdog p {
+	background-color: brown;
+}
+.hotdog p.mustard {
+	background-color: yellow;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;组合选择器（Combine Selector）的weight可以通过其中各个选择器weight的计算得到。&lt;/p&gt;
+
+&lt;p&gt;第一个组合selector &lt;code class=&quot;highlighter-rouge&quot;&gt;.hotdog p&lt;/code&gt;包含了两个selectors，一个&lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; selector和一个&lt;code class=&quot;highlighter-rouge&quot;&gt;class&lt;/code&gt; selector。&lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; selector的 weight 为 &lt;code class=&quot;highlighter-rouge&quot;&gt;0-0-1&lt;/code&gt;，而&lt;code class=&quot;highlighter-rouge&quot;&gt;class&lt;/code&gt; selector的 weight 为 &lt;code class=&quot;highlighter-rouge&quot;&gt;0-1-0&lt;/code&gt;，二者组合计算后得到组合selector的 weight 为 0-1-1。&lt;/p&gt;
+
+&lt;p&gt;第二个组合selector &lt;code class=&quot;highlighter-rouge&quot;&gt;.hotdog p.mustard&lt;/code&gt; 包含了三个selectors，两个&lt;code class=&quot;highlighter-rouge&quot;&gt;class&lt;/code&gt; selector，一个&lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; selector。所以它的 weight 为 0-2-1。&lt;/p&gt;
+
+&lt;p&gt;###Layering Styles with Multiple Classes &lt;br /&gt;
+每一个HTML元素都可以被指定多个css class样式。这样的我们可以更大程度上复用css 的各种样式。
+####Example 1 &lt;br /&gt;
+HTML:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;a class=&quot;btn btn-danger&quot;&amp;gt;...&amp;lt;/a&amp;gt;
+&amp;lt;a class=&quot;btn btn-success&quot;&amp;gt;...&amp;lt;/a&amp;gt;   
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;CSS:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;.btn {
+	font-size: 16px;
+}
+.btn-danger {
+	background: red;
+}
+.btn-success {
+	background: green;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;###常用的CSS属性 &lt;br /&gt;
+####Colors
+颜色的表示方法有如下几种：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Keyword Colors（例如 &lt;code class=&quot;highlighter-rouge&quot;&gt;red&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;green&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;blue&lt;/code&gt;等）&lt;/li&gt;
+  &lt;li&gt;Hexadecimal Colors（例如 &lt;code class=&quot;highlighter-rouge&quot;&gt;#800000&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;#ff0&lt;/code&gt;等）&lt;/li&gt;
+  &lt;li&gt;RGB &amp;amp; RGBa Colors（例如 &lt;code class=&quot;highlighter-rouge&quot;&gt;rgb(128,0,10)&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;rgba(255,102,10, 0.5)&lt;/code&gt;等）&lt;/li&gt;
+  &lt;li&gt;HSL &amp;amp; HSLa Colors（例如 &lt;code class=&quot;highlighter-rouge&quot;&gt;hsl(60, 100%, 50%)&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;hsla(24, 100%, 50%, 0.5)&lt;/code&gt;等）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;####Length 
+长度表示的几种方法：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Pixels（绝对长度，单位为&lt;code class=&quot;highlighter-rouge&quot;&gt;px&lt;/code&gt;）&lt;/li&gt;
+  &lt;li&gt;Percentages（相对长度，宽度的百分比 &lt;code class=&quot;highlighter-rouge&quot;&gt;%&lt;/code&gt;）&lt;/li&gt;
+  &lt;li&gt;Em（这个单位是基于element的font-size的，例如element的font-size为14px，它的width设置为5em，那么它的宽度等于70px）&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Thu, 21 Jul 2016 19:14:19 +0800</pubDate>
+        <link>/ios/2016/07/21/CSS%E9%80%89%E6%8B%A9%E5%99%A8%E7%AE%80%E4%BB%8B.html</link>
+        <guid isPermaLink="true">/ios/2016/07/21/CSS%E9%80%89%E6%8B%A9%E5%99%A8%E7%AE%80%E4%BB%8B.html</guid>
+        
+        
+        <category>iOS</category>
+        
+      </item>
+    
+      <item>
+        <title>如何做一个OC和Swift混编的framework</title>
+        <description>&lt;p&gt;he sakdjas kjd j sa
+ askjhd kasl&lt;/p&gt;
+
+&lt;p&gt;skha dkjas&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 21 May 2016 19:14:19 +0800</pubDate>
+        <link>/ios/2016/05/21/%E5%A6%82%E4%BD%95%E5%81%9A%E4%B8%80%E4%B8%AAOC%E5%92%8CSwift%E6%B7%B7%E7%BC%96%E7%9A%84framework.html</link>
+        <guid isPermaLink="true">/ios/2016/05/21/%E5%A6%82%E4%BD%95%E5%81%9A%E4%B8%80%E4%B8%AAOC%E5%92%8CSwift%E6%B7%B7%E7%BC%96%E7%9A%84framework.html</guid>
+        
+        
+        <category>iOS</category>
+        
+      </item>
     
       <item>
         <title>Welcome to Jekyll!</title>

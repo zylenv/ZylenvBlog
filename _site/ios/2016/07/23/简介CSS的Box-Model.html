@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>简介CSS的Box-Model</title>
+  <meta name="description" content="##Opening the Box Model####1、display">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="/ios/2016/07/23/%E7%AE%80%E4%BB%8BCSS%E7%9A%84Box-Model.html">
+  <link rel="alternate" type="application/rss+xml" title="zylenv" href="/feed.xml">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">zylenv</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">简介CSS的Box-Model</h1>
+    <p class="post-meta"><time datetime="2016-07-23T18:14:19+08:00" itemprop="datePublished">Jul 23, 2016</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>##Opening the Box Model
+####1、display</p>
+
+<p>浏览器会依据element的display属性来决定这个element如何渲染，display的取值有以下几种：</p>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">block</code>	A value of block will make that element a block-level element.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">inline</code> A value of inline will make that element an inline-level element.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">inline-block</code> Using this value will allow an element to behave as a block-level element, accepting all box model properties. However, the element will be displayed in line with other elements, and it will not begin on a new line by default.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">none</code> Using a value of <code class="highlighter-rouge">none</code> will completely hide an element and render the page as if that element doesn’t exist. Any elements nested within this element will also be hidden.</p>
+  </li>
+</ul>
+
+<p>####2、Box Model
+每一个页面上的元素都是rectangular box，都符合box model。CSS中有一些属性决定着box的大小：<code class="highlighter-rouge">width</code>,<code class="highlighter-rouge">height</code>,<code class="highlighter-rouge">padding</code>,<code class="highlighter-rouge">border</code>,<code class="highlighter-rouge">margin</code>。<code class="highlighter-rouge">width</code>和<code class="highlighter-rouge">height</code>指定element的内容的大小，<code class="highlighter-rouge">padding</code>,<code class="highlighter-rouge">border</code>,<code class="highlighter-rouge">margin</code>扩大box的外围。</p>
+
+<p>CSS:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>div {
+	border: 6px solid #949599;
+	height: 100px;
+	margin: 20px;
+	padding: 20px;
+	width: 400px;
+}		
+</code></pre>
+</div>
+
+<p>div的宽度为：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>margin-right + border-right + padding-right + width + padding-left + border-left + margin-left   
+</code></pre>
+</div>
+
+<p>div的高度为：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>margin-top + border-top + padding-top + height + padding-bottom + border-bottom + margin-bottom
+</code></pre>
+</div>
+
+<p>如下图：</p>
+
+<p><img src="/images/box-model.png" width="80%" max-width="600px" /></p>
+
+<p>当我们设置一个元素的width为 400px 时，它实际的width可能是 492px，我们需要将<code class="highlighter-rouge">padding</code>,<code class="highlighter-rouge">border</code>,<code class="highlighter-rouge">margin</code>考虑进去。实际的width并不仅仅包括width属性，也包含<code class="highlighter-rouge">padding-left</code>,<code class="highlighter-rouge">padding-right</code>,<code class="highlighter-rouge">border-left</code>,<code class="highlighter-rouge">border-right</code>,<code class="highlighter-rouge">marin-left</code>,<code class="highlighter-rouge">margin-right</code>。</p>
+
+<p>####3、Box Model的相关属性
+#####（1）Width &amp; Height
+每一个element都有默认的width和height，默认的width和height是由element的display属性决定的。</p>
+
+<ul>
+  <li>
+    <p>width <br />
+<code class="highlighter-rouge">Block-level</code> element的默认width是100%，独占整个水平空间。<code class="highlighter-rouge">inline</code>和<code class="highlighter-rouge">inline-block</code>的width是由element本身内容所需要占用的宽度决定的，<code class="highlighter-rouge">inline-level</code>的元素没有固定的大小，它的宽高与<code class="highlighter-rouge">non-inline</code> element相关。  <br />
+指定<code class="highlighter-rouge">non-inline</code> element的高度使用width属性</p>
+  </li>
+  <li>
+    <p>height
+element默认的height是由它的内容决定的，内容需要多高，它的高度就会扩展多大。
+指定<code class="highlighter-rouge">non-inline</code> element的高度使用height属性</p>
+  </li>
+</ul>
+
+<p>注: <code class="highlighter-rouge">inline-level</code> element 不接受<code class="highlighter-rouge">width</code>、<code class="highlighter-rouge">height</code>的约束。但是<code class="highlighter-rouge">block</code>或者<code class="highlighter-rouge">inline-block</code> element会受<code class="highlighter-rouge">width</code>、<code class="highlighter-rouge">height</code>的约束。</p>
+
+<p>#####（2）Margin &amp; Padding
+对于不同type的element，每个浏览器默认的margin和padding都不一样。我们可以使用CSS reset去将这些默认的margin和padding的设为0。</p>
+
+<p>CSS Reset:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>/* http://meyerweb.com/eric/tools/css/reset/ 2. v2.0 | 20110126		License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+} margin和padding能帮助用户更好的理清页面上的逻辑。从文字的段落上我们能很好的看到这一点。   
+</code></pre>
+</div>
+
+<ul>
+  <li>Margin <code class="highlighter-rouge">margin</code>属性允许我们设置围绕一个element的空间。<code class="highlighter-rouge">margin</code>是一个元素<code class="highlighter-rouge">border</code>之外的空间，而且完全透明。</li>
+  <li>Padding <code class="highlighter-rouge">padding</code>是与<code class="highlighter-rouge">margin</code>非常相似的一个属性。但是它是一个element的<code class="highlighter-rouge">border</code>之内的
+空间。</li>
+</ul>
+
+<p>注:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">margin</code>和<code class="highlighter-rouge">padding</code>对<code class="highlighter-rouge">inline-level</code>element 的影响与它对<code class="highlighter-rouge">block</code>和<code class="highlighter-rouge">inline-block</code>的影响是不一样的。</li>
+  <li><code class="highlighter-rouge">margin</code>对于<code class="highlighter-rouge">inline-level</code>element只在水平方向起作用（也就是说margin只有left和right起作用）。</li>
+  <li><code class="highlighter-rouge">padding</code>对<code class="highlighter-rouge">inline-level</code>element在四个方向上都起作用。但是竖直方向上的<code class="highlighter-rouge">top</code>、<code class="highlighter-rouge">bottom</code>可能会导致element侵入它所在行的上方或下方。</li>
+  <li><code class="highlighter-rouge">padding</code>和<code class="highlighter-rouge">margin</code>对于<code class="highlighter-rouge">block</code>、<code class="highlighter-rouge">inline-block</code>element的影响则是正常的。</li>
+</ul>
+
+<p><code class="highlighter-rouge">margin</code>, <code class="highlighter-rouge">padding</code>的值的顺序为<code class="highlighter-rouge">top</code>,<code class="highlighter-rouge">right</code>,<code class="highlighter-rouge">bottom</code>,<code class="highlighter-rouge">left</code>,从上开始顺时针旋转。 <br />
+<code class="highlighter-rouge">margin</code>, <code class="highlighter-rouge">padding</code>的背景颜色都是透明的，而且不能设置它的颜色。它会把它底部element的颜色透出来。</p>
+
+<p>#####（3）Border
+<code class="highlighter-rouge">border</code>处于<code class="highlighter-rouge">margin</code>和<code class="highlighter-rouge">padding</code>之间。为element提供一个outline。指定一个border至少需要三个值：<code class="highlighter-rouge">width</code>、<code class="highlighter-rouge">style</code>、<code class="highlighter-rouge">color</code>。也可以通过<code class="highlighter-rouge">border-width</code>、<code class="highlighter-rouge">border-style</code>、<code class="highlighter-rouge">border-color</code>分别单独指定这三个元素。 <br />
+指定p的border样式：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>p {
+	border: 6px solid #994532;
+} 这个样式与下面的CSS样式功效是相等的：
+
+p {
+	border-width: 6px;
+	border-style: solid;
+	border-color: #994532;
+}
+</code></pre>
+</div>
+
+<p>也可以单独指定border某一边的样式：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>p {
+	border-bottom: 6px solid #994532;
+}
+p {
+	border-bottom-width: 6px;
+	border-bottom-style: solid;
+	border-bottom-color: #994532;
+}
+</code></pre>
+</div>
+
+<h6 id="border-radius">Border Radius</h6>
+<p>border radius的单位可以是<code class="highlighter-rouge">px</code>、<code class="highlighter-rouge">%</code>。指定一个border radius可以通过四个脚指定：<code class="highlighter-rouge">top-left</code>,<code class="highlighter-rouge">top-right</code>,<code class="highlighter-rouge">bottom-right</code>,<code class="highlighter-rouge">bottom-left</code>。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>div {
+	border-radius: 5px;
+}
+</code></pre>
+</div>
+
+<p>上面的CSS样式相当于同时指定<code class="highlighter-rouge">top-left</code>,<code class="highlighter-rouge">top-right</code>,<code class="highlighter-rouge">bottom-right</code>,<code class="highlighter-rouge">bottom-left</code>为5px。单独指定如下：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>div {
+	border-top-right-radius: 5px;
+}
+</code></pre>
+</div>
+
+<p>#####（4）Box Sizing
+一般我们要计算一个element的实际大小，需要通过它的<code class="highlighter-rouge">border</code>、<code class="highlighter-rouge">padding</code>、<code class="highlighter-rouge">margin</code>、<code class="highlighter-rouge">width</code>、<code class="highlighter-rouge">height</code>等属性计算得到。<code class="highlighter-rouge">box-sizing</code>是CSS3引进的属性。它允许我们指定element如何计算其大小。<code class="highlighter-rouge">box-sizing</code>有三个基础的取值<code class="highlighter-rouge">content-box</code>、<code class="highlighter-rouge">padding-box</code>、<code class="highlighter-rouge">border-box</code>,每一个取值对于box的size的计算方式都是不一样的。</p>
+
+<ul>
+  <li>Content Box	<code class="highlighter-rouge">content-box</code>是<code class="highlighter-rouge">box-sizing</code>的默认值。如果你不指定element的box-sizing属性，那么它的box-sizing属性的值就是<code class="highlighter-rouge">content-box</code>。element的内容大小为width，height属性的值，element的size大小就是width、height加上padding,border和margin属性的值。</li>
+  <li>
+    <p>Padding Box 如果<code class="highlighter-rouge">box-sizing</code>的值为<code class="highlighter-rouge">padding-box</code>，那么如果:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>div {
+    box-sizing: padding-box;
+    padding: 20px;
+    width: 200px;
+    border:2px;
+    margin: 20px;
+} element的实际宽度为 margin-left + border-left + width + border-right + margin-right。而element的内容宽度为width减去padding-left和padding-right的值,高度为height减去padding-left和padding-right的值。也就是说width和height属性将padding属性包含在内。
+</code></pre>
+    </div>
+  </li>
+  <li>Border Box 如果<code class="highlighter-rouge">box-sizing</code>属性为<code class="highlighter-rouge">border-box</code>时，width和height属性将 border 和 padding 都包含在内。也就是说如果 element的width为400px，padding为20px，border为10px，那么element的实际宽度还是400px。</li>
+</ul>
+
+<p><strong>注：</strong> 不管<code class="highlighter-rouge">box-sizing</code>为什么值，margin都不会包含到width中，element的实际大小都需要加上margin。</p>
+
+<p>总的来说，一般将<code class="highlighter-rouge">box-sizing</code>设置为<code class="highlighter-rouge">border-box</code>最好。设置为<code class="highlighter-rouge">border-box</code>更能方便我们计算element的位置与大小。下面的css代码能将所有element的<code class="highlighter-rouge">box-sizing</code>默认设置为<code class="highlighter-rouge">border-box</code></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>*,
+*:before,
+*:after {
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+		    box-sizing: border-box;
+}
+</code></pre>
+</div>
+
+
+  </div>
+
+</article>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">zylenv</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>zylenv</li>
+          <li><a href="mailto:zylenv@gmail.com">zylenv@gmail.com</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/zylenv"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">zylenv</span></a>
+
+          </li>
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

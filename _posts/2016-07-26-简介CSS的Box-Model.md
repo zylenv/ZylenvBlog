@@ -1,9 +1,10 @@
 ---
 layout: post
-title:  "Opening the Box Model"
-date:   2016-07-26 19:14:19 +0800
-categories: jekyll update
+title:  "简介CSS的Box-Model"
+date:   2016-07-23 18:14:19 +0800
+categories: iOS
 ---
+
 
 ##Opening the Box Model
 ####1、display
@@ -42,7 +43,7 @@ div的高度为：
 	
 如下图：   
 
-<img src="./images/box-model.png" width="80%" max-width="600px">
+<img src="{{ site.url }}/images/box-model.png" width="80%" max-width="600px">
 
 当我们设置一个元素的width为 400px 时，它实际的width可能是 492px，我们需要将`padding`,`border`,`margin`考虑进去。实际的width并不仅仅包括width属性，也包含`padding-left`,`padding-right`,`border-left`,`border-right`,`marin-left`,`margin-right`。   
 
