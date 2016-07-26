@@ -1,0 +1,127 @@
+---
+layout: post
+title:  "Getting to Kown CSS"
+date:   2016-07-26 19:14:19 +0800
+categories: jekyll update
+---
+
+## Getting to Kown CSS
+###CSS是如何渲染的
+(From [CSS](http://learn.shayhowe.com/html-css/getting-to-know-css/))   
+
+1、所有的CSS Styles(样式)都是从上往下读的，优先级相等的选择器，处于后面的具有较高优先级。   
+  	
+  	p {
+		background-color: orange;
+		font-size: 24px;
+	}
+	p {
+		background-color: green;
+	}
+	body {
+		background-color: orange;
+		background-color: white;
+	}
+	
+最终的结果是：
+
+	p {
+		font-size: 24px;
+		background-color: green;
+	}
+	body {
+		background-color: white;
+	}
+
+2、每个CSS选择器都有一个weight来计算它的优先级。优先级指示着页面如何渲染。一个选择器的weight越大，它的优先级越高。  
+选择器分`type`，`class`，`ID`三种，每一种都有不同的weight。  
+ 
+-	`type`选择器拥有最低的优先级`0-0-1`   
+-	`class`选择器拥有中等的优先级`0-1-0`   
+-	`ID`选择器拥有最高的优先级`1-0-0`    
+
+####Example 1（单个Selector的情况）
+
+HTML:
+
+	<p id='food'>...</p>
+		
+CSS:
+		
+	#food {
+		background-color: green;
+	}
+	p {
+		background-color: red;
+	}
+
+由于`ID Selector`拥有最高的优先级所以最终结果是：
+		
+	#food {
+		background-color: green;
+	}
+			
+####Example 2（组合Selector的情况）   
+HTML:
+			
+	<div class="hotdog">
+		<p>...</p>
+		<p>...</p>
+		<p class="mustard">...</p>
+	</div>
+
+CSS:   
+
+	.hotdog p {
+		background-color: brown;
+	}
+	.hotdog p.mustard {
+		background-color: yellow;
+	}
+
+组合选择器（Combine Selector）的weight可以通过其中各个选择器weight的计算得到。   
+
+第一个组合selector `.hotdog p`包含了两个selectors，一个`type` selector和一个`class` selector。`type` selector的 weight 为 `0-0-1`，而`class` selector的 weight 为 `0-1-0`，二者组合计算后得到组合selector的 weight 为 0-1-1。   
+
+第二个组合selector `.hotdog p.mustard` 包含了三个selectors，两个`class` selector，一个`type` selector。所以它的 weight 为 0-2-1。   
+
+   
+###Layering Styles with Multiple Classes   
+每一个HTML元素都可以被指定多个css class样式。这样的我们可以更大程度上复用css 的各种样式。
+####Example 1   
+HTML:   
+	
+	<a class="btn btn-danger">...</a>
+	<a class="btn btn-success">...</a>   
+
+CSS:
+
+	.btn {
+		font-size: 16px;
+	}
+	.btn-danger {
+		background: red;
+	}
+	.btn-success {
+		background: green;
+	}
+
+
+
+###常用的CSS属性   
+####Colors
+颜色的表示方法有如下几种：   
+
+*	Keyword Colors（例如 `red`, `green`, `blue`等）
+*	Hexadecimal Colors（例如 `#800000`, `#ff0`等）
+*	RGB & RGBa Colors（例如 `rgb(128,0,10)`,`rgba(255,102,10, 0.5)`等）
+*	HSL & HSLa Colors（例如 `hsl(60, 100%, 50%)`,`hsla(24, 100%, 50%, 0.5)`等）
+
+####Length 
+长度表示的几种方法：   
+
+*	Pixels（绝对长度，单位为`px`）
+*	Percentages（相对长度，宽度的百分比 `%`）
+*	Em（这个单位是基于element的font-size的，例如element的font-size为14px，它的width设置为5em，那么它的宽度等于70px）
+
+
